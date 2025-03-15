@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
+import jwt from 'jsonwebtoken'
 
 const UserSchema: Schema = new Schema({
   username: {
@@ -32,5 +33,9 @@ const UserSchema: Schema = new Schema({
   },
 });
 
+UserSchema.methods.Signjwt=async function(){
+  return jwt.sign
+
+}
 
 export const User=mongoose.models.users || mongoose.model('users',UserSchema)

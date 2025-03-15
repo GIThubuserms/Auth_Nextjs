@@ -8,7 +8,7 @@ import { SendEmail } from "@/lib/mailer";
 export async function POST(req:NextRequest){
    try {
      await dbconnect()
-     const user=req.body()
+     const user=await req.json()
      const {email,password,username}=user
      
      if(!(email&& password)){
@@ -41,7 +41,13 @@ export async function POST(req:NextRequest){
    })
    }
 
-   const mailrespone=await SendEmail({email,emailType:"VERIFY",id:String(newUser._id)})
+   await SendEmail({email,emailType:"VERIFY",id:String(newUser._id)})
+
+   return NextResponse.json({
+    message:"User Created Successfully",
+    status:200,
+    data:newUser
+  })
 
    } catch (error) {
     console.log("Error in signup"+error);
