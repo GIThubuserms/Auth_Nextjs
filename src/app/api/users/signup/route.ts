@@ -6,12 +6,18 @@ import { SendEmail } from "@/lib/mailer";
 
 
 export async function POST(req:NextRequest){
-   try {
-     await dbconnect()
+  await dbconnect()
+
+  try {
+     console.log("Signup1");
      const user=await req.json()
-     const {email,password,username}=user
+     console.log("user :- ", user);
      
-     if(!(email&& password)){
+     const {email,password,username}=user
+
+     console.log("Signup2");
+
+     if(!(email && password)){
       console.log("Email and Password is required");
       return NextResponse.json({message:"Email and Password are required credentials"})       
      }
@@ -41,7 +47,7 @@ export async function POST(req:NextRequest){
    })
    }
 
-   await SendEmail({email,emailType:"VERIFY",id:String(newUser._id)})
+  //  await SendEmail({email,emailType:"VERIFY",id:String(newUser._id)})
 
    return NextResponse.json({
     message:"User Created Successfully",
