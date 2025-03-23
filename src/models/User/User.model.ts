@@ -33,8 +33,12 @@ const UserSchema: Schema = new Schema({
   },
 });
 
-UserSchema.methods.Signjwt=async function(){
-  return jwt.sign
+UserSchema.methods.Signjwt=function(){
+  return jwt.sign({
+      username:this.username,
+      email:this.email,
+      _id:this._id
+    },process.env.JWT_TOKEN!,{expiresIn:"1d"})
 
 }
 

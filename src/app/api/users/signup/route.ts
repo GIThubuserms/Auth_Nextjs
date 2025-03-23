@@ -9,14 +9,9 @@ export async function POST(req:NextRequest){
   await dbconnect()
 
   try {
-     console.log("Signup1");
-     const user=await req.json()
-     console.log("user :- ", user);
-     
+     const user=await req.json()     
      const {email,password,username}=user
-
-     console.log("Signup2");
-
+     
      if(!(email && password)){
       console.log("Email and Password is required");
       return NextResponse.json({message:"Email and Password are required credentials"})       

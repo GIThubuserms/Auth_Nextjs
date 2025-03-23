@@ -5,9 +5,8 @@ export async function dbconnect() {
     if (!process.env.MONGODB_URI) {
       throw new Error("MongoDb connection string error");
     }
-    const db=console.log(process.env.MONGODB_URI!);
     
-    await mongoose.connect(`${process.env.MONGODB_URI!}/${process.env.MYDBNAME!}`);
+    await mongoose.connect(`${process.env.MONGODB_URI!}`);
 
     const mydbconnectionDetails = mongoose.connection;
 

@@ -19,13 +19,15 @@ export async function SendEmail({ email, emailType, id }: EmailConfig) {
 
     if(emailType==="VERIFY"){
       const dbincomingUser=await User.findByIdAndUpdate(id,{
-        VerifyToken:newhashedToken
+        VerifyToken:newhashedToken,
+        VerifyExpiry:Date.now()+3600000
       })
       dbincomingUser.save()
     }
     else if(emailType==="RESET"){
       const dbincomingUser=await User.findByIdAndUpdate(id,{
-        ForgetPasswordToken:newhashedToken
+        ForgetPasswordToken:newhashedToken,
+        ForgetPasswordExpiry:Date.now()+3600000
       })
       dbincomingUser.save()
     }

@@ -3,7 +3,7 @@ import { User } from "@/models/User/User.model";
 import { NextResponse, NextRequest } from "next/server";
 import bcrypt from "bcryptjs";
 
-export async function POST(req: NextRequest,res:NextResponse) {
+export async function POST(req: NextRequest) {
   try {
     await dbconnect();
     const user = await req.json();
@@ -34,14 +34,20 @@ export async function POST(req: NextRequest,res:NextResponse) {
           message: "Incorrect Password",
         }); 
     }
-
+    const token=dbIncomingUser.Signjwt() 
+    console.log("My issued jwt token :- "+token);
+    
      
- 
-    return NextResponse.json({
+
+    const response=NextResponse.json({
       message: "User Created Successfully",
       status: 200,
       data: dbIncomingUser,
     });
+
+    response.cookies.set('token',token,{httpOnly:true})
+    return response
+
   } catch (error) {
     console.log("Error in signin" + error);
     return NextResponse.json({
