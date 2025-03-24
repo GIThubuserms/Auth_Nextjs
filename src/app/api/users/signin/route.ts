@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
           message: "User Doesnot exists ",
         });
       }
-    const hashedpassword = await bcrypt.compare(password,user.password);
+    const hashedpassword = await bcrypt.compare(password,dbIncomingUser.password);
 
     if(!hashedpassword){
         console.log("Password is not correct");
@@ -35,12 +35,9 @@ export async function POST(req: NextRequest) {
         }); 
     }
     const token=dbIncomingUser.Signjwt() 
-    console.log("My issued jwt token :- "+token);
-    
      
-
     const response=NextResponse.json({
-      message: "User Created Successfully",
+      message: "User Login Successfully",
       status: 200,
       data: dbIncomingUser,
     });

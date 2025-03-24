@@ -18,17 +18,17 @@ export async function SendEmail({ email, emailType, id }: EmailConfig) {
       // and also send email to user for the that token
 
     if(emailType==="VERIFY"){
-      const dbincomingUser=await User.findByIdAndUpdate(id,{
+      const dbincomingUser=await User.findByIdAndUpdate(id,{$set:{
         VerifyToken:newhashedToken,
         VerifyExpiry:Date.now()+3600000
-      })
+      }})
       dbincomingUser.save()
     }
     else if(emailType==="RESET"){
-      const dbincomingUser=await User.findByIdAndUpdate(id,{
+      const dbincomingUser=await User.findByIdAndUpdate(id,{$set:{
         ForgetPasswordToken:newhashedToken,
         ForgetPasswordExpiry:Date.now()+3600000
-      })
+      }})
       dbincomingUser.save()
     }
     

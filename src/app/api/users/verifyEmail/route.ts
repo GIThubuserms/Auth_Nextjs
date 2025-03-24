@@ -1,14 +1,8 @@
-// get token from params
-// verify token from db
-// if user match isverfied=true
-
-
 import { dbconnect } from "@/db/dbconnect";
 import { User } from "@/models/User/User.model";
 import { NextResponse, NextRequest } from "next/server";
-import bcrypt from "bcryptjs";
 
-export async function Post(req:NextRequest){
+export async function POST(req: NextRequest) {
     await dbconnect()
     try {
         const body=await req.json()
