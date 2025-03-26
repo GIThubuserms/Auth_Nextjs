@@ -1,13 +1,17 @@
-import React from 'react'
+import React from 'react';
 
-function page({params}) {
+type PageProps = {
+  params: { id: string };
+};
+
+const Page: React.FC<PageProps> = ({ params }) => {
   return (
-    <div className='flex justify-center items-center min-h-screen'>
-      <div className='flex justify-center items-center flex-col'>
-       <h1 className='text-slate-500 text-xl '>{params.id}</h1>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="flex flex-col justify-center items-center p-4 rounded-lg shadow-lg bg-white">
+        <h1 className="text-slate-700 text-2xl font-semibold">{params.id}</h1>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default Page;

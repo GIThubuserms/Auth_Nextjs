@@ -18,7 +18,7 @@ export const GetDataFromToken = async (req: NextRequest) => {
 
    
 
-    const DecodedToken: any = jwt.verify(token, process.env.JWT_TOKEN!);
+    const DecodedToken= jwt.verify(token, process.env.JWT_TOKEN!);
 
     if (!DecodedToken) {
       return NextResponse.json({

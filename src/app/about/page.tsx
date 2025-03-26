@@ -1,12 +1,12 @@
-"use client"
+"use client";
 import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React from 'react'
 import toast from 'react-hot-toast'
 
-function page() {
-  const [data,setdata]=useState('nothing')
+function Page() {
+  const [data,setdata]=React.useState('nothing')
   const router=useRouter()
 
   const logout=async()=>{
@@ -52,4 +52,4 @@ console.log(res);
   )
 }
 
-export default page
+export default Page

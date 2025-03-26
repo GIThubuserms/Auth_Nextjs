@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-function page() {
+function Page() {
   const [token, settoken] = useState("");
   const [loading, setloading] = useState(false);
   const [error, seterror] = useState(false);
@@ -28,6 +28,7 @@ function page() {
         toast.success(response.data.message);
       }
       if (response.data.status >= 400) {
+        seterror(response.data.message)
         toast.error(response.data.message);
       }
       setloading(false)
@@ -52,4 +53,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

@@ -2,10 +2,10 @@
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React  from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 
-function page() {
+function Page() {
 
     const [user,setuser]=React.useState({username:"",password:"",email:""})
     const [loading,setloading]=React.useState(false)
@@ -30,7 +30,7 @@ function page() {
         toast.error(response.data.message)
        }
        setloading(false)
-      } catch (error) {
+      } catch (error:any) {
        toast.error(error.response?.data?.message || 'Something went wrong. Please try again!')
       }finally {
         setloading(false)
@@ -63,4 +63,4 @@ function page() {
   )
 }
 
-export default page
+export default Page
