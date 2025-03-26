@@ -30,7 +30,7 @@ function Page() {
         toast.error(response.data.message)
        }
        setloading(false)
-      } catch (error:any) {
+      } catch (error) {
        toast.error(error.response?.data?.message || 'Something went wrong. Please try again!')
       }finally {
         setloading(false)
