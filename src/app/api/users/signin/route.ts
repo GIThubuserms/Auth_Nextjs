@@ -10,28 +10,31 @@ export async function POST(req: NextRequest) {
     const { email, password } = user;
 
     if (!(email && password)) {
-      console.log("Email and Password is required");
       return NextResponse.json({
         message: "Email and Password are required credentials",
+        status: 400,
+
       });
     }
 
     const dbIncomingUser = await User.findOne({
-      email,
+      email:email
     });
 
     if (!dbIncomingUser) {
-        console.log("User Doesnot exists with that credentials");
         return NextResponse.json({
           message: "User Doesnot exists ",
+          status: 400,
+
         });
       }
     const hashedpassword = await bcrypt.compare(password,dbIncomingUser.password);
 
     if(!hashedpassword){
-        console.log("Password is not correct");
         return NextResponse.json({
           message: "Incorrect Password",
+          status: 400,
+
         }); 
     }
     const token=dbIncomingUser.Signjwt() 

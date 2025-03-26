@@ -14,7 +14,7 @@ export async function POST(req:NextRequest){
      
      if(!(email && password)){
       console.log("Email and Password is required");
-      return NextResponse.json({message:"Email and Password are required credentials"})       
+      return NextResponse.json({message:"Email and Password are required credentials",status:400})       
      }
 
    const isuseralreadyexists=await User.findOne({
@@ -23,7 +23,7 @@ export async function POST(req:NextRequest){
 
    if(isuseralreadyexists){
     console.log("Email and Password is required");
-    return NextResponse.json({message:"User already exists with username or email"})       
+    return NextResponse.json({message:"User already exists with username or email",status:400})       
    }
 
    const hashedpassword=await bcrypt.hash(password,10)
@@ -42,7 +42,7 @@ export async function POST(req:NextRequest){
    })
    }
 
-    await SendEmail({email,emailType:"VERIFY",id:String(newUser._id)})
+    // await SendEmail({email,emailType:"VERIFY",id:String(newUser._id)})
 
    return NextResponse.json({
     message:"User Created Successfully",

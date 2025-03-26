@@ -7,9 +7,13 @@ export async function POST(req: NextRequest) {
     try {
         const body=await req.json()
         const {token}=body
+        console.log(body);
+        console.log("xxxxxxxx"+token);
         
-        const isUserExistWithToken=await User.findOne({VerifyToken:token,VerifyExpiry:{$gt:Date.now()}})
-
+        const isUserExistWithToken=await User.findOne({VerifyToken:token})
+ 
+        console.log("YYYYYYYYYYYYY"+isUserExistWithToken);
+        
         if(!isUserExistWithToken){
           return NextResponse.json({
                 message:"User Credentials Incorrect",
@@ -26,7 +30,10 @@ export async function POST(req: NextRequest) {
         })
         
     } catch (error) {
-        console.log("Error in sending email");
-        throw new Error(error)
+        console.log(error);
+        return NextResponse.json({
+            message:"User Verified  Failed",
+            status:404
+        })
     }
 }
