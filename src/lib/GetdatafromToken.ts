@@ -13,21 +13,16 @@ export const GetDataFromToken = async (req: NextRequest) => {
         status: 403,
       });
     }
-    // console.log("My Token from cokkie :-  " + token);
-    // console.log("My Token Type        :-  " + typeof(token))
 
-   
-
-    const DecodedToken= jwt.verify(token, process.env.JWT_TOKEN!);
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const DecodedToken:any= await jwt.verify(token, process.env.JWT_TOKEN!);
+  
     if (!DecodedToken) {
       return NextResponse.json({
         message: "User is Not verified",
         status: 403,
       });
     }
-    console.log("My decoded Token :- " + DecodedToken);
-
     return DecodedToken._id;
 
   } catch (error) {

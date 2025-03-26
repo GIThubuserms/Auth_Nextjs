@@ -10,14 +10,14 @@ export async function POST(req: NextRequest) {
    const decodedTokenId= await GetDataFromToken(req)
  
    
-   if(!decodedTokenId || !mongoose.isValidObjectId(decodedTokenId)){
+   if (!decodedTokenId ||!mongoose.isValidObjectId(decodedTokenId)) {
     return NextResponse.json({
       message: "User Not Authenticated",
       status: 400,
     })}
 
-   const mongoose_decodedTokenId= new mongoose.Types.ObjectId(decodedTokenId)
-   const dbincominguser=await User.findById(mongoose_decodedTokenId)
+    const mongoose_decodedTokenId = new mongoose.Types.ObjectId(decodedTokenId);
+    const dbincominguser=await User.findById(mongoose_decodedTokenId)
 
    if(!dbincominguser){
     return NextResponse.json({

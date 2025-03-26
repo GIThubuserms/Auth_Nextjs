@@ -51,7 +51,8 @@ export async function SendEmail({ email, emailType, id }: EmailConfig) {
     });
     return mailoptions.response;
   } catch (error) {
-    console.log("Failed to send mail", error);
-    throw new Error(error);
+    if (error instanceof Error) {
+     console.log(error);
   }
+}
 }

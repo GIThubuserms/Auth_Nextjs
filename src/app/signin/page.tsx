@@ -29,9 +29,11 @@ function SignInPage() {
       }
       setLoading(false);
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Something went wrong. Please try again!"
-      );
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("An unknown error occurred");
+      }
     } finally {
       setLoading(false);
     }
@@ -67,10 +69,7 @@ function SignInPage() {
         >
           {loading ? "Loading.." : "Sign In"}
         </button>
-        <Link
-          href={"/signup"}
-          className="text-slate-600 hover:text-sm mt-5"
-        >
+        <Link href={"/signup"} className="text-slate-600 hover:text-sm mt-5">
           Donott have an account? <span className="text-gray-500">Sign Up</span>
         </Link>
       </div>
